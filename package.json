@@ -8,11 +8,10 @@
     "ffmpeg-binaries": "^4.0.0",
     "opusscript": "^0.0.7",
     "simple-youtube-api": "^5.2.1",
-    "youtube-audio-stream": "^0.3.5",
     "ytdl-core": "^2.1.0"
   },
   "engines": {
-    "node": "10.16.x"
+    "node": "10.16.0"
   },
   "devDependencies": {},
   "scripts": {
