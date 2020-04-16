@@ -11,6 +11,9 @@
     "youtube-audio-stream": "^0.3.5",
     "ytdl-core": "^2.1.0"
   },
+  "engines": {
+    "node": "10.16.x"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
