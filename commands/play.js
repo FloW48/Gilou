@@ -98,9 +98,6 @@ module.exports = class Play extends Command{
                 else message.channel.send('**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**');
             }
         }
-        else if (message.content.startsWith("!gstop")){
-            connectionChannel.disconnect();
-        }
     }   
       
 }   
