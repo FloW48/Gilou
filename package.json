@@ -1,0 +1,20 @@
+{
+  "name": "gilou",
+  "version": "1.0.0",
+  "description": "Gilou bot",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "ffmpeg-binaries": "^4.0.0",
+    "opusscript": "^0.0.7",
+    "simple-youtube-api": "^5.2.1",
+    "youtube-audio-stream": "^0.3.5",
+    "ytdl-core": "^2.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "FloW",
+  "license": "ISC"
+}
