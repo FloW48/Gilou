@@ -102,9 +102,6 @@ module.exports = class Play extends Command{
             queue = [];
             singing = false;
             showAndDeleteMessage(message, '**Gilou a fini de chanter, il va se reposer maintenant**')
-            .then((messageToDel) => {
-                messageToDel.delete({timeout: 10000});
-            });
             message.member.voice.channel.leave();
         }
     }   
@@ -141,9 +138,6 @@ async function playMusic(urlToPlay, connection, message){
         }
         else{
             message.channel.send('**Gilou a fini de chanter, il va se reposer maintenant**')
-                .then((messageToDel) => {
-                    messageToDel.delete({timeout: 10000});
-                });
             connection.disconnect();
             singing = false;
         }
