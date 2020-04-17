@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const Play = require('./commands/play');
-const Stop = require('./commands/stop');
 const Help = require('./commands/help')
 
 bot.on('ready', function(){
