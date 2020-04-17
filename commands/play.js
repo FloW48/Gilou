@@ -34,7 +34,6 @@ module.exports = class Play extends Command{
                     url = video.url
                     for (i = 0; i < videos.length; i++){
                         queue.push(videos[i].url)
-                        console.log('ON AJUYRTE UNE VIDEO A LA PLAYLIST')
                     }
                     message.channel.send('**'+videos.length+' vidéos ont été ajoutés à la liste d\'attente**')
                 } catch (error) {
@@ -53,14 +52,12 @@ module.exports = class Play extends Command{
                         return message.channel.send('**__No result__**')
                     }
                 }
-                console.log(video.url)
                 url = video.url 
             }
             if (ytdl.validateURL(url)){
                 if (singing === false){
                     singing = true
                     let voiceChannel = message.member.voice.channel;
-                    console.log(voiceChannel);
                     if (!message.content.includes('/playlist?')) queue.push(url)
                     await voiceChannel.join()
                     .then(connection => {
@@ -99,9 +96,7 @@ module.exports = class Play extends Command{
 }   
 
 async function playMusic(urlToPlay, connection, message){
-    console.log('Fonction play executed');
     let info = await getVideoInfo(urlToPlay)
-    console.log(typeof urlToPlay)
     stream = ytdl(urlToPlay, {filter : 'audioonly'})
     if (info.length.hours === 0) isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
     else isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
@@ -118,7 +113,6 @@ async function playMusic(urlToPlay, connection, message){
             messageToDel.delete()
         })
         if (queue.length != 0){
-            console.log("On change de musique");
             playMusic(queue[0], connection, message, songInfo);
             singing = true;
         }
@@ -131,7 +125,6 @@ async function playMusic(urlToPlay, connection, message){
             singing = false;
         }
     })
-    console.log(queue.length);
 }
 
 function skipMusic(){
