@@ -1,22 +1,14 @@
 {
   "name": "gilou",
   "version": "1.0.0",
-  "description": "Gilou bot",
+  "description": "",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^12.x",
-    "ffmpeg-binaries": "^4.0.0",
-    "opusscript": "^0.0.7",
-    "simple-youtube-api": "^5.2.1",
-    "ytdl-core": "^2.1.0"
-  },
-  "engines": {
-    "node": "12.x"
+    "discord.js": "^12.2.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "FloW",
   "license": "ISC"
