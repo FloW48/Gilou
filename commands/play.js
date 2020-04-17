@@ -19,10 +19,10 @@ module.exports = class Play extends Command{
 
 
     static async action(message){
-        if (message.content.startsWith('!gskip') || message.content.startsWith('!gilouskip') || message.content.startsWith('!p')){
+        if (message.content.startsWith('!gskip') || message.content.startsWith('!gilouskip')){
             skipMusic()
         }
-        else if (message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay')){
+        else if (message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay') || message.content.startsWith('!p')){
             const args = message.content.split(' ');
             const searchString = args.slice(1).join(' ');
             let url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
@@ -57,10 +57,6 @@ module.exports = class Play extends Command{
                 url = video.url 
             }
             if (ytdl.validateURL(url)){
-                if(message.member.voice.status != 0){
-                    queue = []
-                    singing = false;
-                }
                 if (singing === false){
                     singing = true
                     let voiceChannel = message.member.voice.channel;
@@ -125,7 +121,7 @@ async function playMusic(urlToPlay, connection, message){
         else{
             message.channel.send('**Gilou a fini de chanter, il va se reposer maintenant**')
                 .then((messageToDel) => {
-                    messageToDel.delete(10000)
+                    messageToDel.delete(timeout = 10000);
                 });
             connection.disconnect();
             singing = false;
