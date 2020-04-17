@@ -11,13 +11,15 @@ var dispatcher;
 module.exports = class Play extends Command{
 
     static match (message){
-        return message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay') || 
-        message.content.startsWith('!gilouskip') || message.content.startsWith('!gskip') || message.content.startsWith('!gnp') || message.content.startsWith('!gnowplaying') || message.content.startsWith('!glist')
+        return message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay') || message.content.startsWith('!p') ||
+        message.content.startsWith('!gilouskip') || message.content.startsWith('!gskip') || 
+        message.content.startsWith('!gnp') || message.content.startsWith('!gnowplaying') ||
+        message.content.startsWith('!glist')
     }
 
 
     static async action(message){
-        if (message.content.startsWith('!gskip') || message.content.startsWith('!gilouskip')){
+        if (message.content.startsWith('!gskip') || message.content.startsWith('!gilouskip') || message.content.startsWith('!p')){
             skipMusic()
         }
         else if (message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay')){
@@ -55,6 +57,10 @@ module.exports = class Play extends Command{
                 url = video.url 
             }
             if (ytdl.validateURL(url)){
+                if(message.member.voice.status != 0){
+                    queue = []
+                    singing = false;
+                }
                 if (singing === false){
                     singing = true
                     let voiceChannel = message.member.voice.channel;
