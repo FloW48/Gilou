@@ -12,7 +12,8 @@ module.exports = class Play extends Command{
 
     static match (message){
         return message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay') || 
-        message.content.startsWith('!gilouskip') || message.content.startsWith('!gskip') || message.content.startsWith('!gnp') || message.content.startsWith('!gnowplaying') || message.content.startsWith('!glist')
+        message.content.startsWith('!gilouskip') || message.content.startsWith('!gskip') || message.content.startsWith('!gnp') || message.content.startsWith('!gnowplaying') || message.content.startsWith('!glist') ||
+        message.content.startsWith('!giloustop') || message.content.startsWith('!gstop');
     }
 
 
@@ -57,21 +58,19 @@ module.exports = class Play extends Command{
                 url = video.url 
             }
             if (ytdl.validateURL(url)){
-                if (message.client.status != 0){
-                    queue = []
-                    singing = false
-                }
                 if (singing === false){
+                  console.log("Ma première foids")
                     singing = true
-                    let voiceChannel = message.member.voiceChannel;
+                    let voiceChannel = message.member.voice.channel;
                     if (!message.content.includes('/playlist?')) queue.push(url)
-                    var connectionChannel = await voiceChannel.join()
+                    await voiceChannel.join()
                     .then(connection => {
                         playMusic(queue[0], connection, message);
                     })
                     .catch(console.error);
                 }
                 else{
+                  console.log("Ajout à la file")
                     queue.push(url)
                     message.channel.send('**'+video.title+'**' + ' ajoutée à la file d\'attente');
                 }
@@ -108,14 +107,12 @@ async function playMusic(urlToPlay, connection, message){
     stream = ytdl(urlToPlay, {filter : 'audioonly'})
     if (info.length.hours === 0) isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
     else isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
-    
-    dispatcher = connection.playStream(stream)
+    dispatcher = connection.play(stream)
         .on('error', () => {
             message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
         })
-    
         
-    dispatcher.on('end', function(){
+    dispatcher.on('finish', function(){
         queue.splice(0, 1);
         isPlayingMess.then((messageToDel) => {
             messageToDel.delete()
@@ -135,6 +132,7 @@ async function playMusic(urlToPlay, connection, message){
         }
     })
     console.log(queue.length);
+    console.log(singing);
 }
 
 function skipMusic(){

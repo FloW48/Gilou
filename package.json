@@ -4,7 +4,8 @@
   "description": "Gilou bot",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^11.5.1",
+    "@discordjs/opus": "^0.1.0",
+    "discord.js": "^12.1.1",
     "ffmpeg-binaries": "^4.0.0",
     "opusscript": "^0.0.7",
     "simple-youtube-api": "^5.2.1",
@@ -15,7 +16,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "FloW",
   "license": "ISC"

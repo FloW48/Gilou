@@ -8,7 +8,7 @@ module.exports = class Stop extends Command{
 
 
     static action(message){
-        let voiceChannel = message.member.voiceChannel;
+        let voiceChannel = message.member.voice.channel;
         voiceChannel.leave();
     }
 }
