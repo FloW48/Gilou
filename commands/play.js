@@ -128,7 +128,7 @@ async function playMusic(urlToPlay, connection, message){
 }
 
 function skipMusic(){
-    dispatcher.finish();
+    dispatcher.end();
 }
 
 async function getVideoInfo(url){
