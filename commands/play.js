@@ -57,15 +57,11 @@ module.exports = class Play extends Command{
                 url = video.url 
             }
             if (ytdl.validateURL(url)){
-                if (message.client.status != 0){
-                    queue = []
-                    singing = false
-                }
                 if (singing === false){
                     singing = true
-                    let voiceChannel = message.member.voiceChannel;
+                    let voiceChannel = message.member.voice.channel;
                     if (!message.content.includes('/playlist?')) queue.push(url)
-                    var connectionChannel = await voiceChannel.join()
+                    await voiceChannel.join()
                     .then(connection => {
                         playMusic(queue[0], connection, message);
                     })
@@ -109,13 +105,13 @@ async function playMusic(urlToPlay, connection, message){
     if (info.length.hours === 0) isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
     else isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
     
-    dispatcher = connection.playStream(stream)
+    dispatcher = connection.play(stream)
         .on('error', () => {
             message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
         })
     
         
-    dispatcher.on('end', function(){
+    dispatcher.on('finish', function(){
         queue.splice(0, 1);
         isPlayingMess.then((messageToDel) => {
             messageToDel.delete()
