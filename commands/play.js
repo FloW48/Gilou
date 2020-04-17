@@ -42,7 +42,7 @@ module.exports = class Play extends Command{
                     for (i = 0; i < videos.length; i++){
                         queue.push(videos[i].url)
                     }
-                    message.channel.send('**'+videos.length+' vidéos ont été ajoutés à la liste d\'attente**')
+                    showAndDeleteMessage('**'+videos.length+' vidéos ont été ajoutés à la liste d\'attente**');
                 } catch (error) {
                     return console.log('Erreur lors du chargement de la playlist' + error)
                 }
@@ -56,7 +56,7 @@ module.exports = class Play extends Command{
                         var video = await youtube.getVideoByID(videos[0].id);
                     } catch (err) {
                         console.log(err)
-                        return message.channel.send('**__No result__**')
+                        return showAndDeleteMessage('**__No result__**')
                     }
                 }
                 url = video.url 
@@ -74,17 +74,17 @@ module.exports = class Play extends Command{
                 }
                 else{
                     queue.push(url)
-                    message.channel.send('**'+video.title+'**' + ' ajoutée à la file d\'attente');
+                    showAndDeleteMessage('**'+video.title+'**' + ' ajoutée à la file d\'attente')
                 }
             }
             else{
-                message.channel.send('**__Erreur URL non valide__**')
+                showAndDeleteMessage('**__Erreur URL non valide__**')
             }            
         }
         else if (message.content.startsWith('!gnp' || message.content.startsWith('!gnowplaying'))) {
             let info = await getVideoInfo(queue[0])
-            if (info.length.hours === 0) isPlayingMess = message.channel.send('Voici ce que je chante acutellement : ' +'**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**' );
-            else isPlayingMess = message.channel.send('Voici ce que je chante acutellement : ' +'**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**');
+            if (info.length.hours === 0) isPlayingMess = showAndDeleteMessage('Voici ce que je chante acutellement : ' +'**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**' )
+            else isPlayingMess = showAndDeleteMessage('Voici ce que je chante acutellement : ' +'**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**');
         }
         else if (message.content.startsWith('!glist')){
             let i;
@@ -101,15 +101,22 @@ module.exports = class Play extends Command{
         else if (message.content.startsWith('!gstop') || message.content.startsWith('!giloustop')){
             queue = [];
             singing = false;
-            message.channel.send('**Gilou a fini de chanter, il va se reposer maintenant**')
+            showAndDeleteMessage('**Gilou a fini de chanter, il va se reposer maintenant**')
             .then((messageToDel) => {
-                messageToDel.delete(timeout = 10000);
+                messageToDel.delete({timeout: 10000});
             });
             message.member.voice.channel.leave();
         }
     }   
       
 }   
+
+async function showAndDeleteMessage(str){
+    message.channel.send(str)
+    .then((messageToDel) => {
+        messageToDel.delete({timeout: 10000});
+    });
+}
 
 async function playMusic(urlToPlay, connection, message){
     let info = await getVideoInfo(urlToPlay)
@@ -135,7 +142,7 @@ async function playMusic(urlToPlay, connection, message){
         else{
             message.channel.send('**Gilou a fini de chanter, il va se reposer maintenant**')
                 .then((messageToDel) => {
-                    messageToDel.delete(timeout = 10000);
+                    messageToDel.delete({timeout: 10000});
                 });
             connection.disconnect();
             singing = false;
