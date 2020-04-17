@@ -9,8 +9,7 @@ bot.on('ready', function(){
 
 
 bot.on('message', function (message){
-    let commandUsed =   Stop.parse(message) ||
-                        Play.parse(message) ||
+    let commandUsed =   Play.parse(message) ||
                         Help.parse(message);
 })
 
