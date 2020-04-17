@@ -14,7 +14,8 @@ module.exports = class Play extends Command{
         return message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay') || message.content.startsWith('!p') ||
         message.content.startsWith('!gilouskip') || message.content.startsWith('!gskip') || 
         message.content.startsWith('!gnp') || message.content.startsWith('!gnowplaying') ||
-        message.content.startsWith('!glist')
+        message.content.startsWith('!glist') ||
+        message.content.startsWith('!gstop') || message.content.startsWith('!giloustop')
     }
 
 
@@ -92,6 +93,11 @@ module.exports = class Play extends Command{
                 if (info.length.hours === 0) message.channel.send('**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**' );
                 else message.channel.send('**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**');
             }
+        }
+        else if (message.content.startsWith('!gstop') || message.content.startsWith('!giloustop')){
+            queue = [];
+            singing = false;
+            voiceChannel.leave();
         }
     }   
       
