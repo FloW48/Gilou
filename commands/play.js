@@ -101,7 +101,11 @@ module.exports = class Play extends Command{
         else if (message.content.startsWith('!gstop') || message.content.startsWith('!giloustop')){
             queue = [];
             singing = false;
-            voiceChannel.leave();
+            message.channel.send('**Gilou a fini de chanter, il va se reposer maintenant**')
+            .then((messageToDel) => {
+                messageToDel.delete(timeout = 10000);
+            });
+            message.member.voice.channel.leave();
         }
     }   
       
