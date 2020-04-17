@@ -60,6 +60,7 @@ module.exports = class Play extends Command{
                 if (singing === false){
                     singing = true
                     let voiceChannel = message.member.voice.channel;
+                    console.log(voiceChannel);
                     if (!message.content.includes('/playlist?')) queue.push(url)
                     await voiceChannel.join()
                     .then(connection => {
@@ -134,7 +135,7 @@ async function playMusic(urlToPlay, connection, message){
 }
 
 function skipMusic(){
-    dispatcher.end();
+    dispatcher.finish();
 }
 
 async function getVideoInfo(url){
