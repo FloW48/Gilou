@@ -23,7 +23,7 @@ module.exports = class Play extends Command{
 
     static async action(message){
         if (message.content.startsWith('!gskip') || message.content.startsWith('!gilouskip')){
-            skipMusic()
+            skipMusic(message)
         }
         else if (message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay') || message.content.startsWith('!p')){
             const args = message.content.split(' ');
@@ -104,6 +104,8 @@ module.exports = class Play extends Command{
         }
         else if (message.content.startsWith('!grepeat') || message.content.startsWith('!gr')){
             repeat = !repeat
+            if(repeat) { showAndDeleteMessage(message, 'Je jouerai cette musique jusqu\' à ma ***MORT***') }
+            else { showAndDeleteMessage(message, 'J\'avoue on en a marre de cette musique au bout d\'un moment') }
         }
     }   
       
@@ -150,7 +152,11 @@ async function playMusic(urlToPlay, connection, message){
     })
 }
 
-function skipMusic(){
+function skipMusic(message){
+    if(repeat){
+        showAndDeleteMessage(message, "J'ai pris la décision de désactiver le repeat pour vous, ne me remercier pas");
+        repeat = false;
+    }
     dispatcher.end();
 }
 
