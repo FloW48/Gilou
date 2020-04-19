@@ -24,10 +24,6 @@ module.exports = class Play extends Command{
             skipMusic()
         }
         else if (message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay') || message.content.startsWith('!p')){
-            if(message.member.voice.status != 0){
-                queue = []
-                singing = false;
-            }
             const args = message.content.split(' ');
             const searchString = args.slice(1).join(' ');
             let url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
