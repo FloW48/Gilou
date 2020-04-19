@@ -7,6 +7,7 @@ const youtube = new YouTube('AIzaSyCmeV3veizmR4y0bVlNtdJ38xo4UVTgtK8')
 queue = []
 singing = false
 var dispatcher;
+var repeat = false;
 
 module.exports = class Play extends Command{
 
@@ -15,7 +16,8 @@ module.exports = class Play extends Command{
         message.content.startsWith('!gilouskip') || message.content.startsWith('!gskip') || 
         message.content.startsWith('!gnp') || message.content.startsWith('!gnowplaying') ||
         message.content.startsWith('!glist') ||
-        message.content.startsWith('!gstop') || message.content.startsWith('!giloustop')
+        message.content.startsWith('!gstop') || message.content.startsWith('!giloustop') ||
+        message.content.startsWith('!grepeat') || message.content.startsWith('!gr')
     }
 
 
@@ -100,6 +102,9 @@ module.exports = class Play extends Command{
             showAndDeleteMessage(message, '**Gilou a fini de chanter, il va se reposer maintenant**')
             message.member.voice.channel.leave();
         }
+        else if (message.content.startsWith('!grepeat') || message.content.startsWith('!gr')){
+            repeat = !repeat
+        }
     }   
       
 }   
@@ -124,18 +129,23 @@ async function playMusic(urlToPlay, connection, message){
     
         
     dispatcher.on('finish', function(){
-        queue.splice(0, 1);
-        isPlayingMess.then((messageToDel) => {
-            messageToDel.delete()
-        })
-        if (queue.length != 0){
-            playMusic(queue[0], connection, message, songInfo);
-            singing = true;
+        if(repeat){
+            playMusic(queue[0], connection, message);
         }
         else{
-            message.channel.send('**Gilou a fini de chanter, il va se reposer maintenant**')
-            connection.disconnect();
-            singing = false;
+            queue.splice(0, 1);
+            isPlayingMess.then((messageToDel) => {
+                messageToDel.delete()
+            })
+            if (queue.length != 0){
+                playMusic(queue[0], connection, message);
+                singing = true;
+            }
+            else{
+                message.channel.send('**Gilou a fini de chanter, il va se reposer maintenant**')
+                connection.disconnect();
+                singing = false;
+            }
         }
     })
 }
