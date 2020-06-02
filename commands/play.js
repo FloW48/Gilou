@@ -59,6 +59,7 @@ module.exports = class Play extends Command{
                 }
                 url = video.url 
             }
+            console.log(url)
             if (ytdl.validateURL(url)){
                 if (singing === false){
                     singing = true
