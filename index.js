@@ -36,7 +36,6 @@ function alvityl(){
     setTimeout(function() {
         d = new Date();
         hour = d.getHours()
-        console.log(hour)
         alvityl()
     }, millisecondsToWait);
 }
