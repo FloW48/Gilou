@@ -27,9 +27,9 @@ var hour = -1;
 alvityl()
 
 function alvityl(){
-    if( (hour >= 0 && hour <= 8) || (hour >= 22 && hour <=23)){
+    if(hour >= 20 || hour <= 6){
         if(oldHour != hour){
-            //Play.playActivyl(bot)
+            Play.playActivyl(bot)
             oldHour = hour
         }
     }
