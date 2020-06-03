@@ -110,6 +110,8 @@ module.exports = class Play extends Command{
             else { showAndDeleteMessage(message, 'J\'avoue on en a marre de cette musique au bout d\'un moment') }
         }
         else if (message.content.startsWith('!alvityl')){
+            url = 'https://www.youtube.com/watch?v=9tfvLLTVRn0';
+            console.log("yo")
             if (singing === false){
                 singing = true
                 let voiceChannel = message.member.voice.channel;
@@ -120,13 +122,10 @@ module.exports = class Play extends Command{
                     .on('error', () => {
                         message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
                     })
-                    
-                    dispatcher.on('finish', function(){
-                            connection.disconnect();
-                            singing = false;
-                        }
-                    })
 
+                    dispatcher.on('finish', function(){
+                        connection.disconnect();
+                    })
                 })
                 .catch(console.error);
             }
