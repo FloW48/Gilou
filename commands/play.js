@@ -22,6 +22,23 @@ module.exports = class Play extends Command{
         message.content.startsWith('!alvityl')
     }
 
+    static playActivyl(bot){
+        bot.channels.fetch('339020307203620865').then(channel =>{
+            channel.join()
+            .then(connection => {
+                dispatcher = connection.play('Alvityl.mp3', {volume : 6})
+                .on('error', () => {
+                    message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
+                })
+    
+                dispatcher.on('finish', function(){
+                    singing = false;
+                    connection.disconnect();
+                })
+            })
+        }) .catch(console.error);
+    }
+
 
     static async action(message){
         if (message.content.startsWith('!gskip') || message.content.startsWith('!gilouskip')){
@@ -118,12 +135,13 @@ module.exports = class Play extends Command{
                 if (!message.content.includes('/playlist?')) queue.push(url)
                 await voiceChannel.join()
                 .then(connection => {
-                    dispatcher = connection.play('Alvityl.mp3')
+                    dispatcher = connection.play('Alvityl.mp3', {volume : 6})
                     .on('error', () => {
                         message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
                     })
 
                     dispatcher.on('finish', function(){
+                        singing = false;
                         connection.disconnect();
                     })
                 })
