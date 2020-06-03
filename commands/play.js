@@ -116,15 +116,11 @@ module.exports = class Play extends Command{
                 if (!message.content.includes('/playlist?')) queue.push(url)
                 await voiceChannel.join()
                 .then(connection => {
-                    dispatcher = connection.playFile('../Alvityl.mp3')
+                    dispatcher = connection.play('../Alvityl.mp3')
                     .on('error', () => {
                         message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
                     })
 
-                    dispatcher.on('finish', function(){
-                        singing = false;
-                        connection.disconnect();
-                    })
                 })
                 .catch(console.error);
             }
