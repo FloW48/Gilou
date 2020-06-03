@@ -8,6 +8,7 @@ queue = []
 singing = false
 var dispatcher;
 var repeat = false;
+var url
 
 module.exports = class Play extends Command{
 
@@ -17,7 +18,8 @@ module.exports = class Play extends Command{
         message.content.startsWith('!gnp') || message.content.startsWith('!gnowplaying') ||
         message.content.startsWith('!glist') ||
         message.content.startsWith('!gstop') || message.content.startsWith('!giloustop') ||
-        message.content.startsWith('!grepeat') || message.content.startsWith('!gr')
+        message.content.startsWith('!grepeat') || message.content.startsWith('!gr') ||
+        message.content.startsWith('!alvityl')
     }
 
 
@@ -28,7 +30,7 @@ module.exports = class Play extends Command{
         else if (message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay') || message.content.startsWith('!p')){
             const args = message.content.split(' ');
             const searchString = args.slice(1).join(' ');
-            let url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+            url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
 
             if (message.content.includes('/playlist?') || message.content.includes('list')){
                 try {
@@ -59,7 +61,6 @@ module.exports = class Play extends Command{
                 }
                 url = video.url 
             }
-            console.log(url)
             if (ytdl.validateURL(url)){
                 if (singing === false){
                     singing = true
@@ -107,6 +108,28 @@ module.exports = class Play extends Command{
             repeat = !repeat
             if(repeat) { showAndDeleteMessage(message, 'Je jouerai cette musique jusqu\' à ma ***MORT***') }
             else { showAndDeleteMessage(message, 'J\'avoue on en a marre de cette musique au bout d\'un moment') }
+        }
+        else if (message.content.startsWith('!alvityl')){
+            url = 'https://www.youtube.com/watch?v=9tfvLLTVRn0';
+            console.log("yo")
+            if (singing === false){
+                singing = true
+                let voiceChannel = message.member.voice.channel;
+                if (!message.content.includes('/playlist?')) queue.push(url)
+                await voiceChannel.join()
+                .then(connection => {
+                    dispatcher = connection.play('../Alvityl.mp3')
+                    .on('error', () => {
+                        message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
+                    })
+
+                    dispatcher.on('finish', function(){
+                        connection.disconnect();
+                    })
+                })
+                .catch(console.error);
+            }
+
         }
     }   
       
