@@ -120,6 +120,12 @@ module.exports = class Play extends Command{
                     .on('error', () => {
                         message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
                     })
+                    
+                    dispatcher.on('finish', function(){
+                            connection.disconnect();
+                            singing = false;
+                        }
+                    })
 
                 })
                 .catch(console.error);
