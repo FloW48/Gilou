@@ -11,7 +11,6 @@ bot.on('ready', function(){
 
 
 bot.on('message', function (message){
-    console.log(message);
     let commandUsed =   Play.parse(message) ||
                         Help.parse(message);
 })
@@ -36,6 +35,7 @@ function alvityl(){
     setTimeout(function() {
         d = new Date();
         hour = d.getHours()
+        console.log(hour)
         alvityl()
     }, millisecondsToWait);
 }
