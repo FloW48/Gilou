@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const Play = require('./commands/play');
 const Help = require('./commands/help')
+const Fnatic = require('./commands/fnatic')
 
 var messageActivyl = 
 
@@ -12,7 +13,8 @@ bot.on('ready', function(){
 
 bot.on('message', function (message){
     let commandUsed =   Play.parse(message) ||
-                        Help.parse(message);
+                        Help.parse(message) ||
+                        Fnatic.parse(message);
 })
 
 bot.login('NTk2MzM4MDA5MDc1NjEzNzAz.Xpgg4A.ojXFJNxS0oZGywzHkoHtpypLbPo')
