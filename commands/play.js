@@ -81,7 +81,6 @@ module.exports = class Play extends Command{
                 }
                 url = video.url 
             }
-            console.log("dfbhjdsfbhjdsfbhjdsf "+typeof(url))
             if (ytdl.validateURL(url)){
                 if (singing === false){
                     singing = true
@@ -163,7 +162,6 @@ async function showAndDeleteMessage(message, str){
 }
 
 async function playMusic(urlToPlay, connection, message){
-    console.log("URRLLLL : "+typeof(urlToPlay))
     let info = await getVideoInfo(urlToPlay)
     stream = ytdl(urlToPlay, {filter : 'audioonly'})
     if (info.length.hours === 0) isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
