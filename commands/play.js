@@ -23,20 +23,23 @@ module.exports = class Play extends Command{
     }
 
     static playActivyl(bot){
-        bot.channels.fetch('339020307203620865').then(channel =>{
-            channel.join()
-            .then(connection => {
-                dispatcher = connection.play('Alvityl.mp3', {volume : 6})
-                .on('error', () => {
-                    message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
+        if(!singing){
+            bot.channels.fetch('339020307203620865').then(channel =>{
+                channel.join()
+                .then(connection => {
+                    singing = true;
+                    dispatcher = connection.play('Alvityl.mp3', {volume : 6})
+                    .on('error', () => {
+                        message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
+                    })
+        
+                    dispatcher.on('finish', function(){
+                        singing = false;
+                        connection.disconnect();
+                    })
                 })
-    
-                dispatcher.on('finish', function(){
-                    singing = false;
-                    connection.disconnect();
-                })
-            })
-        }) .catch(console.error);
+            }) .catch(console.error);
+        }
     }
 
 
@@ -78,6 +81,7 @@ module.exports = class Play extends Command{
                 }
                 url = video.url 
             }
+            console.log("dfbhjdsfbhjdsfbhjdsf "+typeof(url))
             if (ytdl.validateURL(url)){
                 if (singing === false){
                     singing = true
@@ -127,8 +131,6 @@ module.exports = class Play extends Command{
             else { showAndDeleteMessage(message, 'J\'avoue on en a marre de cette musique au bout d\'un moment') }
         }
         else if (message.content.startsWith('!alvityl')){
-            url = 'https://www.youtube.com/watch?v=9tfvLLTVRn0';
-            console.log("yo")
             if (singing === false){
                 singing = true
                 let voiceChannel = message.member.voice.channel;
@@ -161,6 +163,7 @@ async function showAndDeleteMessage(message, str){
 }
 
 async function playMusic(urlToPlay, connection, message){
+    console.log("URRLLLL : "+typeof(urlToPlay))
     let info = await getVideoInfo(urlToPlay)
     stream = ytdl(urlToPlay, {filter : 'audioonly'})
     if (info.length.hours === 0) isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
