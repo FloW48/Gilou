@@ -133,7 +133,6 @@ module.exports = class Play extends Command{
             if (singing === false){
                 singing = true
                 let voiceChannel = message.member.voice.channel;
-                if (!message.content.includes('/playlist?')) queue.push(url)
                 await voiceChannel.join()
                 .then(connection => {
                     dispatcher = connection.play('Alvityl.mp3', {volume : 6})
