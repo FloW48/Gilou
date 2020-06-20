@@ -5,7 +5,7 @@ const Help = require('./commands/help')
 const Fnatic = require('./commands/fnatic')
 
 
-var millisecondsToWait = 100;
+var millisecondsToWait = 10000;
 var d;
 var oldHour = -1;
 var hour = -1;
@@ -45,9 +45,15 @@ function alvityl(){
 
 function day_to_ingenieur(channel){
     if(hour == 9){
-        const diffTime = Math.abs(dateToInge - d);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-        console.log(diffDays);
-        channel.send("<@256054054260572161> <@266220917791653889> <@202170302401085440> Il vous reste **__"+ diffDays+ "__** jours avant de devenir ingé !!")
+        if(oldHour != hour){
+            const diffTime = Math.abs(dateToInge - d);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            console.log(diffDays);
+            channel.send("<@256054054260572161> <@266220917791653889> <@202170302401085440> Il vous reste **__"+ diffDays+ "__** jours avant de devenir ingé !!")
+            oldHour = hour
+        }
+    }
+    else{
+        oldHour = hour
     }
 }
