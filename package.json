@@ -1,13 +1,9 @@
 {
   "name": "gilou",
   "version": "1.0.0",
-  "engines": {
-    "node": "12.x"
-  },
-  "description": "",
+  "description": "gilou le sang",
   "main": "index.js",
   "dependencies": {
-    "@discordjs/opus": "^0.1.0",
     "discord.js": "^12.2.0",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^4.1.1",
