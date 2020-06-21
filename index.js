@@ -29,7 +29,6 @@ bot.login('NTk2MzM4MDA5MDc1NjEzNzAz.Xpgg4A.ojXFJNxS0oZGywzHkoHtpypLbPo')
 
 function timer(){
     setTimeout(function() {
-        console.log("ptdrr")
         d = new Date();
         hour = d.getHours()
         alvityl()
@@ -51,7 +50,6 @@ function alvityl(){
 function day_to_ingenieur(){
     if(hour == 6){
         if(oldHour != hour){
-            console.log("yo")
             const diffTime = Math.abs(dateToInge - d);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             console.log(diffDays);
