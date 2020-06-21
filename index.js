@@ -44,7 +44,7 @@ function alvityl(){
 }
 
 function day_to_ingenieur(channel){
-    if(hour == 9){
+    if(hour == 11){
         if(oldHour != hour){
             const diffTime = Math.abs(dateToInge - d);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
