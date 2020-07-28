@@ -14,11 +14,13 @@ const T = new Twit({
 
 
 
-var millisecondsToWait = 10000;
+var millisecondsToWait = 1000;
 var d;
+var lengthCursus = 1765;
 var oldHour = -1;
 var hour = -1;
-var dateToInge = new Date(2024, 6, 1);
+var year = new Date().getFullYear();
+var dateToInge = new Date(year+5, 6, 1);
 var dateToPrism = new Date(2020, 7, 31);
 
 
@@ -42,6 +44,7 @@ function timer(){
         d = new Date();
         day = d.getDay();
         hour = d.getHours();
+        year = d.getFullYear();
         alvityl();
         day_to_ingenieur();
         prism();
@@ -63,15 +66,49 @@ function day_to_ingenieur(){
     if(hour == 6){
         if(oldHour != hour){
             let diffTime = Math.abs(dateToInge - d);
-            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));      
-            console.log("yikes")  
-            T.post('statuses/update', { status: 'Chers futurs ingénieurs, il vous reste plus que '+diffDays+' jours avant la fin, c\'est bientôt'})
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));  
+            T.post('statuses/update', { status: createMessage()})
         }
     }
 }
+
+function createMessage(){
+    /*Chers futurs ingénieurs,
+
+1er année : plus que 1765 jours Plant
+▓▓▓▓▓ 35%
+
+2e année : plus que 1582 jours Étincelles
+▓▓▓▓▓ 10%
+
+3e année : plus que 1200 jours Symbole étourdi
+▓▓▓▓▓ 34%
+
+4e année : plus que 850 jours Feu
+▓▓▓▓▓ 39%
+
+Dernière année : plus que 250 jours Bombe de table
+▓▓▓▓▓ 100%*/
+
+    let date1 = new Date(year, 8, 1)
+    let date2 = new Date(year+1, 8, 1)
+    let date3 = new Date(year+2, 8, 1)
+    let date4 = new Date(year+3, 8, 1)
+    let date5 = new Date(year+4, 8, 1)
+
+    let msg = "Chers futurs ingénieurs,\n\n1er anneé : "+Math.ceil((dateToInge-d)/(1000 * 60 * 60 * 24))+" jours 🌱"
+    +"\n\n2e anneé : "+Math.ceil((dateToInge-date2-(d-date1))/(1000 * 60 * 60 * 24))+" jours ✨"
+    +"\n\n3e anneé : "+Math.ceil((dateToInge-date3-(d-date1))/(1000 * 60 * 60 * 24))+" jours 💫"
+    +"\n\n4e anneé : "+Math.ceil((dateToInge-date4-(d-date1))/(1000 * 60 * 60 * 24))+" jours 🔥"
+    +"\n\nDernière anneé : "+Math.ceil((dateToInge-date5-(d-date1))/(1000 * 60 * 60 * 24))+" jours 🎉"
+
+    return msg;
+
+}
+
 function prism(){
     if(day == 1){
-        if(hour == 6 && oldHour != hour){
+        if(hour == 6 && oldHour != hour && dateToPrism - d > 0){
             let diffTime = Math.abs(dateToPrism - d);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             bot.channels.fetch('210094361428492289').then(channel =>{
