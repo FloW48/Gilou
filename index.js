@@ -14,7 +14,7 @@ const T = new Twit({
 
 
 
-var millisecondsToWait = 1000;
+var millisecondsToWait = 10000;
 var d;
 var lengthCursus = 1765;
 var oldHour = -1;
