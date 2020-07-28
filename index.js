@@ -4,6 +4,15 @@ const Play = require('./commands/play');
 const Help = require('./commands/help')
 const Fnatic = require('./commands/fnatic')
 
+const Twit = require('twit')
+const T = new Twit({
+    consumer_key:         'sJErGHIEZ3J7pX5wuIBUFXeGH',
+    consumer_secret:      'cZYXecVPiLCa0v2Edd8UCI5SkUVSvyMenzMWbh9o8HMr3eJDk2',
+    access_token:         '1288092472695037952-aVSc9VcQ2guQCpnvsLlBOw35mjVPfu',
+    access_token_secret:  'uvbYSS7445sVzhyCKDpoMrjhiZ86IIUJhBQaVtsLVle9r',
+  })
+
+
 
 var millisecondsToWait = 10000;
 var d;
@@ -54,10 +63,9 @@ function day_to_ingenieur(){
     if(hour == 6){
         if(oldHour != hour){
             let diffTime = Math.abs(dateToInge - d);
-            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            bot.channels.fetch('210094361428492289').then(channel =>{
-                channel.send("<@256054054260572161> <@202170302401085440> <@266220917791653889> Il vous reste **__"+ diffDays+ "__** jours avant de devenir ingé !!")
-            })
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));      
+            console.log("yikes")  
+            T.post('statuses/update', { status: 'Chers futurs ingénieurs, il vous reste plus que '+diffDays+' jours avant la fin, c\'est bientôt'})
         }
     }
 }
