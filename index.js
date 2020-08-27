@@ -20,9 +20,8 @@ var lengthCursus = 1765;
 var oldHour = -1;
 var hour = -1;
 var year = new Date().getFullYear();
+var dateToIngeButitIsFix = new Date(2024, 6, 1)
 var dateToInge = new Date(year+5, 6, 1);
-var dateToPrism = new Date(2020, 7, 31);
-
 
 bot.on('ready', function(){
     bot.user.setActivity("!ghelp pour les commandes").catch(console.error);
@@ -47,7 +46,6 @@ function timer(){
         year = d.getFullYear();
         alvityl();
         day_to_ingenieur();
-        prism();
         oldHour = hour;
         timer();
         return
@@ -63,11 +61,12 @@ function alvityl(){
 }
 
 function day_to_ingenieur(){
-    if(hour == 6){
+    if(hour == 13){
         if(oldHour != hour){
-            let diffTime = Math.abs(dateToInge - d);
+            let diffTime = Math.abs(dateToIngeButitIsFix - d);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));  
             T.post('statuses/update', { status: createMessage()})
+            bot.channels.fetch('210094361428492289').then( channel => channel.send("<@266220917791653889>, <@202170302401085440>, <@233317429961424897> et <@256054054260572161>, il vous reste "+diffDays+" avant de devenir de grands ingénieurs https://tenor.com/view/they-dont-stop-coming-rap-all-star-gif-14395546"))
         }
     }
 }
@@ -104,16 +103,4 @@ Dernière année : plus que 250 jours Bombe de table
 
     return msg;
 
-}
-
-function prism(){
-    if(day == 1){
-        if(hour == 6 && oldHour != hour && dateToPrism - d > 0){
-            let diffTime = Math.abs(dateToPrism - d);
-            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            bot.channels.fetch('210094361428492289').then(channel =>{
-                channel.send("<@202103842974859264> Encore **__"+ diffDays+ "__** jours pour faire 10k€ avec PRISM et la formation !!")
-            })
-        }
-    }
 }
