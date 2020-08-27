@@ -61,7 +61,7 @@ function alvityl(){
 }
 
 function day_to_ingenieur(){
-    if(hour == 13){
+    if(hour == 5){
         if(oldHour != hour){
             let diffTime = Math.abs(dateToIngeButitIsFix - d);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));  
