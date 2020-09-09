@@ -3,6 +3,7 @@ const bot = new Discord.Client();
 const Play = require('./commands/play');
 const Help = require('./commands/help')
 const Fnatic = require('./commands/fnatic')
+const ChangeGif = require('./commands/changeGif')
 
 const Twit = require('twit')
 const T = new Twit({
@@ -29,9 +30,10 @@ bot.on('ready', function(){
 })
 
 bot.on('message', function (message){
-    let commandUsed =   Play.parse(message) ||
-                        Help.parse(message) ||
-                        Fnatic.parse(message);
+    let commandUsed =   Fnatic.parse(message) ||
+                        Play.parse(message) ||
+                        ChangeGif.parse(message) ||
+                        Help.parse(message);
 })
 
 bot.login('NTk2MzM4MDA5MDc1NjEzNzAz.Xpgg4A.ojXFJNxS0oZGywzHkoHtpypLbPo')
@@ -66,7 +68,7 @@ function day_to_ingenieur(){
             let diffTime = Math.abs(dateToIngeButitIsFix - d);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));  
             T.post('statuses/update', { status: createMessage()})
-            bot.channels.fetch('210094361428492289').then( channel => channel.send("<@266220917791653889>, <@202170302401085440>, <@233317429961424897> et <@256054054260572161>, il vous reste "+diffDays+" avant de devenir de grands ingénieurs https://tenor.com/view/they-dont-stop-coming-rap-all-star-gif-14395546"))
+            bot.channels.fetch('210094361428492289').then(channel => channel.send(" et <@256054054260572161>, il vous reste "+diffDays+" avant de devenir de grands ingénieurs " + ChangeGif.getGif()))
         }
     }
 }
