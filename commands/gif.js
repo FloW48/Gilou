@@ -2,12 +2,12 @@ const Command = require('./command');
 
 var gif = "https://tenor.com/view/they-dont-stop-coming-rap-all-star-gif-14395546";
 
-module.exports = class ChangeGif extends Command{
+module.exports = class Gif extends Command{
 
     static match(message){
-        if(message.content.startsWith("!changegif") || message.content.startsWith("!cg")){
+        if(message.content.startsWith("!gif change ") || message.content.startsWith("!cg")){
             var args = message.content.split(' ');
-            var gifUrl = args[1];
+            var gifUrl = args[2];
             if(gifUrl.includes('tenor') || gifUrl.includes("giphy")){
                 gif = gifUrl;
                 message.channel.send("**Gif d'ingénieur changé**")
@@ -16,6 +16,10 @@ module.exports = class ChangeGif extends Command{
             else{
                 message.channel.send("**Ce n'est pas un gif ça monsieur**")
             }
+        }
+        else if(message.content.startsWith("!gif get")){
+            message.channel.send(gif);
+            message.delete()
         }
     }
     

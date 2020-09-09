@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 const Play = require('./commands/play');
 const Help = require('./commands/help')
 const Fnatic = require('./commands/fnatic')
-const ChangeGif = require('./commands/changeGif')
+const Gif = require('./commands/gif')
 
 const Twit = require('twit')
 const T = new Twit({
@@ -17,7 +17,6 @@ const T = new Twit({
 
 var millisecondsToWait = 10000;
 var d;
-var lengthCursus = 1765;
 var oldHour = -1;
 var hour = -1;
 var year = new Date().getFullYear();
@@ -32,7 +31,7 @@ bot.on('ready', function(){
 bot.on('message', function (message){
     let commandUsed =   Fnatic.parse(message) ||
                         Play.parse(message) ||
-                        ChangeGif.parse(message) ||
+                        Gif.parse(message) ||
                         Help.parse(message);
 })
 
@@ -68,7 +67,10 @@ function day_to_ingenieur(){
             let diffTime = Math.abs(dateToIngeButitIsFix - d);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));  
             T.post('statuses/update', { status: createMessage()})
-            bot.channels.fetch('210094361428492289').then(channel => channel.send(" et <@256054054260572161>, il vous reste "+diffDays+" avant de devenir de grands ingénieurs " + ChangeGif.getGif()))
+            bot.channels.fetch('210094361428492289').then(channel => {
+                channel.send("<@266220917791653889>, <@202170302401085440>, <@233317429961424897> et <@256054054260572161>, il vous reste "+diffDays+" avant de devenir de grands ingénieurs ")
+                channel.send(Gif.getGif())
+            })
         }
     }
 }

@@ -1,7 +1,6 @@
 const Command = require('./command');
 const ytdl = require ('ytdl-core');
 const YouTube = require('simple-youtube-api')
-
 const youtube = new YouTube('AIzaSyCmeV3veizmR4y0bVlNtdJ38xo4UVTgtK8')
 
 queue = []
