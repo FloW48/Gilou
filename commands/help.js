@@ -8,16 +8,35 @@ module.exports = class Help extends Command{
 
     static action(message, bot){
         var args = message.content.split(' ');
-        var urlAvatar;
+        var urlAvatarFloW = bot.users.fetch('256054054260572161').then(user => urlAvatarFloW = user.avatarURL())
     
 
         if(args.length == 1){
             const embed = new Discord.MessageEmbed();
-            embed.setTitle("Besoin d'aide ? Gilou est là pour t'aider")
+            embed.setTitle("Besoin d'aide ? Gilou est là pour t'aider !")
             embed.setAuthor(bot.user.username,  bot.user.avatarURL())
-            embed.setFooter("Owner : FloW")
-            embed.setTimestamp(Date.now());
-            message.channel.send(embed);
+            embed.setTimestamp(Date.now()+1000*60*60*2);
+            embed.setColor([240,176,255])
+
+            embed.addField("🎵 Commandes audio 🎵", 
+            ">>> • !gplay ou !p `<lien>` ou `<mot clé>`\n"+
+            " • !gstop\n"+
+            " • !gskip\n"+
+            " • !gpause (si déjà en pause, relance la musique)\n"+
+            " • !grepeat (passe en boucle la musique actuelle)\n"+
+            " • !gnp (pour obtenir la chanson en train d'être jouée)\n"+
+            " • !glist (pour obtenir toutes les musiques dans la queue)\n")
+
+            embed.addField("🤡 Commandes Gif Ingénieur 🤡", 
+            ">>> • !gif change `<lien gif>`\n"+
+            " • !gif get")
+
+            var urlAvatarFloW = bot.users.fetch('256054054260572161').then(user => 
+                {
+                    urlAvatarFloW = user.avatarURL()
+                    embed.setFooter("Owner : FloW", urlAvatarFloW)
+                    message.channel.send(embed);
+                })
         }
         //const embed = new Discord.MessageEmbed();
         //embed.setTitle('Besoin d\'aide ? Gilou est là pour ça !');
