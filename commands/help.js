@@ -6,11 +6,23 @@ module.exports = class Help extends Command{
         return message.content.startsWith('!ghelp')
     }
 
-    static action(message){
-        const embed = new Discord.MessageEmbed();
-        embed.setTitle('Besoin d\'aide ? Gilou est là pour ça !');
-        embed.setColor('#ff33cc');
-        embed.setDescription('!gplay + Mots Clés ou Lien ```Effectue une recherche sur YouTube en cas de mots clés, et séléctionne le premier résultat.\nSi vous entrez un lien de vidéo, le son sera joué, si vous entrez un lien de playlist, toutes les musiques seront ajoutées à la file d\'attente``` \n\n !gskip : ```Passe à la musique suivante``` \n\n !gnp ```Donne le nom de la musique qui se joue actuellement```\n\n !gstop : ```Déconnecte Gilou et enlève toutes les belles chansons qu\'il voulait jouer de la file d\'attente```')
-        message.channel.send(embed);
+    static action(message, bot){
+        var args = message.content.split(' ');
+        var urlAvatar;
+    
+
+        if(args.length == 1){
+            const embed = new Discord.MessageEmbed();
+            embed.setTitle("Besoin d'aide ? Gilou est là pour t'aider")
+            embed.setAuthor(bot.user.username,  bot.user.avatarURL())
+            embed.setFooter("Owner : FloW")
+            embed.setTimestamp(Date.now());
+            message.channel.send(embed);
+        }
+        //const embed = new Discord.MessageEmbed();
+        //embed.setTitle('Besoin d\'aide ? Gilou est là pour ça !');
+        //embed.setColor('#ff33cc');
+        //embed.setDescription('!gplay + Mots Clés ou Lien ```Effectue une recherche sur YouTube en cas de mots clés, et séléctionne le premier résultat.\nSi vous entrez un lien de vidéo, le son sera joué, si vous entrez un lien de playlist, toutes les musiques seront ajoutées à la file d\'attente``` \n\n !gskip : ```Passe à la musique suivante``` \n\n !gnp ```Donne le nom de la musique qui se joue actuellement```\n\n !gstop : ```Déconnecte Gilou et enlève toutes les belles chansons qu\'il voulait jouer de la file d\'attente```')
+        //message.channel.send(embed);
     }
 }

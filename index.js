@@ -29,10 +29,10 @@ bot.on('ready', function(){
 })
 
 bot.on('message', function (message){
-    let commandUsed =   Fnatic.parse(message) ||
-                        Play.parse(message) ||
-                        Gif.parse(message) ||
-                        Help.parse(message);
+    let commandUsed =   Fnatic.parse(message, bot) ||
+                        Play.parse(message, bot) ||
+                        Gif.parse(message, bot) ||
+                        Help.parse(message, bot);
 })
 
 bot.login('NTk2MzM4MDA5MDc1NjEzNzAz.Xpgg4A.ojXFJNxS0oZGywzHkoHtpypLbPo')

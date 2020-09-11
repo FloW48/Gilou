@@ -8,6 +8,7 @@ singing = false
 var dispatcher;
 var repeat = false;
 var url
+var paused = false;
 
 module.exports = class Play extends Command{
 
@@ -17,6 +18,7 @@ module.exports = class Play extends Command{
         message.content.startsWith('!gnp') || message.content.startsWith('!gnowplaying') ||
         message.content.startsWith('!glist') ||
         message.content.startsWith('!gstop') || message.content.startsWith('!giloustop') ||
+        message.content.startsWith('!gpause') ||
         message.content.startsWith('!grepeat') || message.content.startsWith('!gr') ||
         message.content.startsWith('!alvityl')
     }
@@ -122,6 +124,20 @@ module.exports = class Play extends Command{
             singing = false;
             showAndDeleteMessage(message, '**Gilou a fini de chanter, il va se reposer maintenant**')
             message.member.voice.channel.leave();
+        }
+        else if (message.content.startsWith('!gpause')){
+            if(singing){
+                if(paused){
+                    dispatcher.resume();
+                    paused = !paused
+                    showAndDeleteMessage(message, "**Je remets le son bébé**")
+                }
+                else{
+                    dispatcher.pause();
+                    paused = !paused
+                    showAndDeleteMessage(message, "**Je mets pause, tu peux aller pisser**")
+                }
+            }    
         }
         else if (message.content.startsWith('!grepeat') || message.content.startsWith('!gr')){
             repeat = !repeat
