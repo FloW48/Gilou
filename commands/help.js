@@ -15,7 +15,7 @@ module.exports = class Help extends Command{
             const embed = new Discord.MessageEmbed();
             embed.setTitle("Besoin d'aide ? Gilou est là pour t'aider !")
             embed.setAuthor(bot.user.username,  bot.user.avatarURL())
-            embed.setTimestamp(Date.now()+1000*60*60*2);
+            embed.setTimestamp(Date.now());
             embed.setColor([240,176,255])
 
             embed.addField("🎵 Commandes audio 🎵", 
