@@ -48,6 +48,8 @@ module.exports = class Play extends Command{
         if (message.content.startsWith('!gskip') || message.content.startsWith('!gilouskip')){
             skipMusic(message)
         }
+
+        
         else if (message.content.startsWith('!gilouplay') || message.content.startsWith('!gplay') || message.content.startsWith('!p')){
             const args = message.content.split(' ');
             const searchString = args.slice(1).join(' ');
@@ -102,11 +104,15 @@ module.exports = class Play extends Command{
                 showAndDeleteMessage(message, '**__Erreur URL non valide__**')
             }            
         }
+
+
         else if (message.content.startsWith('!gnp' || message.content.startsWith('!gnowplaying'))) {
             let info = await getVideoInfo(queue[0])
             if (info.length.hours === 0) isPlayingMess = showAndDeleteMessage(message, 'Voici ce que je chante acutellement : ' +'**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**' )
             else isPlayingMess = showAndDeleteMessage(message, 'Voici ce que je chante acutellement : ' +'**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**');
         }
+
+
         else if (message.content.startsWith('!glist')){
             let i;
             let info; 
@@ -119,12 +125,16 @@ module.exports = class Play extends Command{
                 else message.channel.send('**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+'**');
             }
         }
+
+
         else if (message.content.startsWith('!gstop') || message.content.startsWith('!giloustop')){
             queue = [];
             singing = false;
             showAndDeleteMessage(message, '**Gilou a fini de chanter, il va se reposer maintenant**')
             message.member.voice.channel.leave();
         }
+
+
         else if (message.content.startsWith('!gpause')){
             if(singing){
                 if(paused){
@@ -139,11 +149,14 @@ module.exports = class Play extends Command{
                 }
             }    
         }
+
         else if (message.content.startsWith('!grepeat') || message.content.startsWith('!gr')){
             repeat = !repeat
             if(repeat) { showAndDeleteMessage(message, 'Je jouerai cette musique jusqu\' à ma ***MORT***') }
             else { showAndDeleteMessage(message, 'J\'avoue on en a marre de cette musique au bout d\'un moment') }
         }
+
+
         else if (message.content.startsWith('!alvityl')){
             if (singing === false){
                 singing = true
