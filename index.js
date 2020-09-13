@@ -68,7 +68,7 @@ function day_to_ingenieur(){
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));  
             T.post('statuses/update', { status: createMessage()})
             bot.channels.fetch('210094361428492289').then(channel => {
-                channel.send("<@266220917791653889>, <@202170302401085440>, <@233317429961424897> et <@256054054260572161>, il vous reste "+diffDays+" avant de devenir de grands ingénieurs ")
+                channel.send("<@266220917791653889>, <@202170302401085440>, <@233317429961424897> et <@256054054260572161>, il vous reste "+diffDays+" jours avant de devenir de grands ingénieurs ")
                 channel.send(Gif.getGif())
             })
         }
