@@ -194,12 +194,12 @@ async function playMusic(urlToPlay, connection, message){
     if (info.length.hours === 0) isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
     else isPlayingMess = message.channel.send('Gilou chante : ' +'**'+info.title+' '+'('+info.length.hours+(9<info.length.minutes? ':' : ':0')+info.length.minutes+(9<info.length.seconds? ':' : ':0')+info.length.seconds+')'+' => '+'**' +urlToPlay);
     
+
     dispatcher = connection.play(stream)
         .on('error', () => {
             message.channel.send('**__Une erreur s\'est produite, veuillez réessayer__**')
         })
-    
-        
+     
     dispatcher.on('finish', function(){
         if(repeat){
             playMusic(queue[0], connection, message);

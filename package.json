@@ -3,17 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "FloW",
-  "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.3.1",
-    "ffmpeg-static": "^4.0.0",
+    "discord.js": "^12.4.1",
+    "ffmpeg-static": "^4.2.7",
     "node-opus": "^0.3.3",
     "simple-youtube-api": "^5.2.1",
     "twit": "^2.2.11",
-    "ytdl-core": "^2.1.7"
-  }
+    "ytdl-core": "^4.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FloW48/Gilou.git"
+  },
+  "author": "FloW",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FloW48/Gilou/issues"
+  },
+  "homepage": "https://github.com/FloW48/Gilou#readme"
 }
