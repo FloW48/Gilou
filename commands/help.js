@@ -18,7 +18,7 @@ module.exports = class Help extends Command{
             embed.setTimestamp(Date.now());
             embed.setColor([240,176,255])
 
-            embed.addField("🎵 Commandes audio 🎵", 
+            embed.addField("🎵 Commandes audio 🎵 (c kasé mais np)", 
             ">>> • !gplay ou !p `<lien>` ou `<mot clé>`\n"+
             " • !gstop\n"+
             " • !gskip\n"+

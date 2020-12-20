@@ -30,7 +30,7 @@ bot.on('ready', function(){
 
 bot.on('message', function (message){
     let commandUsed =   Fnatic.parse(message, bot) ||
-                        Play.parse(message, bot) ||
+                        //Play.parse(message, bot) ||
                         Gif.parse(message, bot) ||
                         Help.parse(message, bot);
 })
@@ -45,7 +45,7 @@ function timer(){
         day = d.getDay();
         hour = d.getHours();
         year = d.getFullYear();
-        alvityl();
+        //alvityl();
         day_to_ingenieur();
         oldHour = hour;
         timer();
