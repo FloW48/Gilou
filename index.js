@@ -7,10 +7,10 @@ const Gif = require('./commands/gif')
 
 const Twit = require('twit')
 const T = new Twit({
-    consumer_key:         'sJErGHIEZ3J7pX5wuIBUFXeGH',
-    consumer_secret:      'cZYXecVPiLCa0v2Edd8UCI5SkUVSvyMenzMWbh9o8HMr3eJDk2',
-    access_token:         '1288092472695037952-aVSc9VcQ2guQCpnvsLlBOw35mjVPfu',
-    access_token_secret:  'uvbYSS7445sVzhyCKDpoMrjhiZ86IIUJhBQaVtsLVle9r',
+    consumer_key:         'token',
+    consumer_secret:      'tekken',
+    access_token:         'tetris',
+    access_token_secret:  'lulz',
   })
 
 
@@ -35,7 +35,7 @@ bot.on('message', function (message){
                         Help.parse(message, bot);
 })
 
-bot.login('NTk2MzM4MDA5MDc1NjEzNzAz.Xpgg4A.ojXFJNxS0oZGywzHkoHtpypLbPo')
+bot.login('token')
     .catch(console.error);
 
 
