@@ -93,17 +93,17 @@ function createMessage(){
 Dernière année : plus que 250 jours Bombe de table
 ▓▓▓▓▓ 100%*/
 
-    let date1 = new Date(year, 8, 1)
-    let date2 = new Date(year+1, 8, 1)
-    let date3 = new Date(year+2, 8, 1)
-    let date4 = new Date(year+3, 8, 1)
-    let date5 = new Date(year+4, 8, 1)
+    // let date1 = new Date(year, 8, 1)
+    // let date2 = new Date(year+1, 8, 1)
+    // let date3 = new Date(year+2, 8, 1)
+    // let date4 = new Date(year+3, 8, 1)
+    // let date5 = new Date(year+4, 8, 1)
 
-    let msg = "Chers futurs ingénieurs,\n\n1er année : "+Math.ceil((dateToInge-d)/(1000 * 60 * 60 * 24))+" jours 🌱"
-    +"\n\n2e année : "+Math.ceil((dateToInge-date2-(d-date1))/(1000 * 60 * 60 * 24))+" jours ✨"
-    +"\n\n3e année : "+Math.ceil((dateToInge-date3-(d-date1))/(1000 * 60 * 60 * 24))+" jours 💫"
-    +"\n\n4e année : "+Math.ceil((dateToInge-date4-(d-date1))/(1000 * 60 * 60 * 24))+" jours 🔥"
-    +"\n\nDernière année : "+Math.ceil((dateToInge-date5-(d-date1))/(1000 * 60 * 60 * 24))+" jours 🎉"
+    // let msg = "Chers futurs ingénieurs,\n\n1er année : "+Math.ceil((dateToInge-d)/(1000 * 60 * 60 * 24))+" jours 🌱"
+    // +"\n\n2e année : "+Math.ceil((dateToInge-date2-(d-date1))/(1000 * 60 * 60 * 24))+" jours ✨"
+    // +"\n\n3e année : "+Math.ceil((dateToInge-date3-(d-date1))/(1000 * 60 * 60 * 24))+" jours 💫"
+    // +"\n\n4e année : "+Math.ceil((dateToInge-date4-(d-date1))/(1000 * 60 * 60 * 24))+" jours 🔥"
+    // +"\n\nDernière année : "+Math.ceil((dateToInge-date5-(d-date1))/(1000 * 60 * 60 * 24))+" jours 🎉"
 
     return msg;
 
